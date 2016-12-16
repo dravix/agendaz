@@ -1,0 +1,50 @@
+<!-- application/layouts/scripts/layout.phtml -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Agendaz</title>
+
+    <!-- Bootstrap core CSS -->
+  
+  	<?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/vendor/twbs/bootstrap/dist/css/bootstrap.min.css') ?>
+  	<?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/vendor/agenda/css/jumbotron-narrow.css') ?>
+ <?php print $this->headScript()->appendFile($this->baseUrl().'/vendor/twbs/bootstrap/dist/js/bootstrap.js')
+ ->prependFile($this->baseUrl().'/vendor/components/jquery/jquery.min.js'); ?>
+
+   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="<?php echo $this->baseUrl()."/app" ?>">Contactos</a></li>
+            <li role="presentation"><a href="<?php echo $this->baseUrl()."/app/add" ?>">Agregar</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">AgendaZ</h3>
+      </div>
+		<?php echo $this->layout()->content ?>
+      <footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
