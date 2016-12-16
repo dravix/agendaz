@@ -1,4 +1,52 @@
-<br /><br />
 <div id="view-content">
 	<h2>Lista de contactos</h2>
 </div>
+
+<div class="row">
+	<div class="col-md-5">
+		<div id="lista" class="list-group">
+			<?php foreach ($this->contactos as $contacto):?>
+			<a href="#" class="list-group-item contacto" 
+			data-id="<?=$contacto['IdContacto']?>">
+				<?= $contacto['Nombre'] ?>
+			</a>
+			<?php endforeach; ?>
+		</div> <!-- fin de lista -->
+	</div>
+	<div class="col-md-7" >
+		<div class="panel panel-default">
+			<div class="panel-heading">Detalles de contacto</div>
+			<div class="panel-body" id="detalles">
+				
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<div id="nuevo">
+	
+</div><!-- fin de nuevo -->
+
+<div id="ver">
+	
+</div><!-- fin de ver -->
+ <?php print $this->headScript()->appendFile($this->baseUrl().'/bower_components/mustache.js/mustache.min.js') ?>
+<script>
+
+let view="<h1>{{Nombre}}</h1> <p>Correo electrónico: <a href='mailto:{{Email}}'>{{Email}}</a> </p> <p>Dirección: {{Direccion}}</p> <a href='#' class='btn btn-success pull-right'> Editar</a> ";
+
+	$('.contacto').on('click',function(){
+		let id=$(this).data('id');
+		$.ajax({
+			url:"<?= $this->baseUrl()."/app/ver/" ?>",
+			data:{id:id},
+			type:'post',
+			dataType:'json',
+			success:function(resp){
+				$('#detalles').html(Mustache.render(view,resp));
+			}
+		});
+	});
+
+</script>
