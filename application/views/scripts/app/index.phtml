@@ -5,6 +5,9 @@
 <div class="row">
 	<div class="col-md-5">
 		<div id="lista" class="list-group">
+			<a href="#" class="list-group-item active btn-nuevo" >
+				Agregar nuevo ...
+			</a>
 			<?php foreach ($this->contactos as $contacto):?>
 			<a href="#" class="list-group-item contacto" 
 			data-id="<?=$contacto['IdContacto']?>">
@@ -15,7 +18,7 @@
 	</div>
 	<div class="col-md-7" >
 		<div class="panel panel-default">
-			<div class="panel-heading">Detalles de contacto</div>
+			<div class="panel-heading">Detalles de contacto </div>
 			<div class="panel-body" id="detalles">
 				
 			</div>
@@ -25,7 +28,27 @@
 </div>
 
 <div id="nuevo">
-	
+	<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div><!-- fin de nuevo -->
 
 <div id="ver">
@@ -49,4 +72,27 @@ let view="<h1>{{Nombre}}</h1> <p>Correo electrónico: <a href='mailto:{{Email}}'
 		});
 	});
 
+	$('.btn-nuevo').on('click',function(){
+		let id=$(this).data('id');
+		$.ajax({
+			url:"<?= $this->baseUrl()."/app/add/" ?>",
+			type:'post',
+			// dataType:'json',
+			success:function(resp){
+				$('#detalles').html(resp);
+			}
+		});
+	});
+	$('.contacto').on('beforeSend',function(){
+		let id=$(this).data('id');
+		$.ajax({
+			url:"<?= $this->baseUrl()."/app/add/" ?>",
+			type:'post',
+			// dataType:'json',
+			success:function(resp){
+				$('#detalles').html(resp);
+			}
+		});
+		return false;
+	});
 </script>
